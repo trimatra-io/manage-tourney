@@ -19,8 +19,18 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const body = await req.json();
-  const data: Record<string, any> = {};
+  const body = (await req.json()) as {
+    skor1?: number | null;
+    skor2?: number | null;
+    status?: string;
+    pemenangId?: string | null;
+  };
+  const data: {
+    skor1?: number | null;
+    skor2?: number | null;
+    status?: string;
+    pemenangId?: string | null;
+  } = {};
   if (body.skor1 !== undefined) data.skor1 = body.skor1;
   if (body.skor2 !== undefined) data.skor2 = body.skor2;
   if (body.status !== undefined) data.status = body.status;

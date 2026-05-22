@@ -107,7 +107,6 @@ export default async function PublikHasilPage() {
           <CardContent className="space-y-3">
             {jadwal.filter((j: JadwalResult) => j.pertandingan.some((p: MatchResult) => p.pemenangId)).map((j: JadwalResult) => {
               const final = j.pertandingan.find((p: MatchResult) => p.babak === "FINAL");
-              const semis = j.pertandingan.filter((p: MatchResult) => p.babak === "SEMIFINAL");
               return (
                 <div key={j.id} className="border rounded-lg overflow-hidden">
                   <div className="bg-green-600 text-white px-3 py-2 text-sm font-semibold">{j.nama}</div>

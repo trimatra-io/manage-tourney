@@ -10,11 +10,10 @@ type RecentAtlet = {
 };
 
 export default async function AdminDashboardPage() {
-  const [total, pending, verified, rejected, perguruan] = await Promise.all([
+  const [total, pending, verified, perguruan] = await Promise.all([
     prisma.atlet.count(),
     prisma.atlet.count({ where: { status: "PENDING" } }),
     prisma.atlet.count({ where: { status: "VERIFIED" } }),
-    prisma.atlet.count({ where: { status: "REJECTED" } }),
     prisma.perguruan.count(),
   ]);
 

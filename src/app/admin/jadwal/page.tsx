@@ -57,6 +57,7 @@ export default function AdminJadwalPage() {
     ]);
 
     setJadwal(j);
+    setSelectedIds((prev) => prev.filter((id) => j.some((item) => item.id === id)));
     setKejuaraan(k);
     setLoading(false);
   }, []);
@@ -66,10 +67,6 @@ export default function AdminJadwalPage() {
       void fetchData();
     });
   }, [fetchData]);
-
-  useEffect(() => {
-    setSelectedIds((prev) => prev.filter((id) => jadwal.some((item) => item.id === id)));
-  }, [jadwal]);
 
   const filteredJadwal = jadwal.filter((item) => {
     const query = search.trim().toLowerCase();

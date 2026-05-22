@@ -1,10 +1,11 @@
 import { nextAuth as auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
+import type { SessionUser } from "@/types/session";
 
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
-  const role = (req.auth?.user as any)?.role;
+  const role = (req.auth?.user as SessionUser | undefined)?.role;
 
   const isAdminRoute = nextUrl.pathname.startsWith("/admin");
   const isDashboardRoute = nextUrl.pathname.startsWith("/dashboard");
