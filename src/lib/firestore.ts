@@ -175,7 +175,7 @@ async function hydratePertandingan(data: AnyRecord, include?: AnyRecord) {
   if (!include) return data;
   const out: AnyRecord = { ...data };
 
-  const hydrateMatchAtlet = async (atletId?: string | null, cfg?: AnyRecord) => {
+  const hydrateMatchAtlet = async (atletId?: string | null, cfg?: AnyRecord | boolean) => {
     if (!atletId) return null;
     const atlet = await readOne("atlet", atletId);
     if (!atlet) return null;

@@ -160,6 +160,7 @@ function SidebarMenuButton({
 }: {
   component?: React.ElementType
   isActive?: boolean
+  className?: string
 } & Record<string, unknown>) {
   return (
     <Component

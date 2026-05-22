@@ -19,6 +19,7 @@ type Jadwal = {
 };
 type Kejuaraan = { id: string; nama: string };
 type SortKey = "nama" | "tanggal" | "lokasi" | "pertandingan" | "status";
+type JadwalStatusFilter = "ALL" | "DRAFT" | "PUBLISHED";
 
 const emptyForm = { nama: "", tanggal: "", lokasi: "", status: "DRAFT" };
 
@@ -36,7 +37,7 @@ export default function AdminJadwalPage() {
   const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("ALL");
+  const [statusFilter, setStatusFilter] = useState<JadwalStatusFilter>("ALL");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [sortConfig, setSortConfig] = useState<{ key: SortKey; direction: "asc" | "desc" }>({
     key: "tanggal",
@@ -354,7 +355,7 @@ export default function AdminJadwalPage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
-            <Select value={statusFilter} onValueChange={(value) => setStatusFilter(value)}>
+            <Select value={statusFilter} onValueChange={(value) => setStatusFilter(value ?? "ALL")}>
               <SelectTrigger className="w-full sm:w-48"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">Semua Status</SelectItem>
@@ -548,7 +549,7 @@ export default function AdminJadwalPage() {
                 value={kejuaraanSearch}
                 onChange={(event) => setKejuaraanSearch(event.target.value)}
               />
-              <Select value={kejuaraanUsageFilter} onValueChange={(value: "ALL" | "UNUSED") => setKejuaraanUsageFilter(value)}>
+              <Select value={kejuaraanUsageFilter} onValueChange={(value) => setKejuaraanUsageFilter(value ?? "ALL")}>
                 <SelectTrigger className="w-44">
                   <SelectValue />
                 </SelectTrigger>
